@@ -9,7 +9,9 @@ from flask import (
 from glanerbeard.server import Server
 
 app = Flask(__name__)
-app.config.from_pyfile('../settings.py')
+app.config.from_object('glanerbeard.default_settings')
+app.config.from_envvar('GLANERBEARD_SETTINGS')
+
 
 servers = Server.createFromConfig(app.config['SERVERS'], app.config['API_KEYS'])
 
