@@ -1,7 +1,6 @@
 import requests
 import logging
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
 
 class Server:
 	def __init__(self, name, url, apikey):
