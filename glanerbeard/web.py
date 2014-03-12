@@ -1,11 +1,12 @@
+import logging
+
 from flask import (
 	Flask,
 	render_template,
 	abort
 )
 
-from server import Server
-import logging
+from glanerbeard.server import Server
 
 app = Flask(__name__)
 app.config.from_pyfile('../settings.py')
