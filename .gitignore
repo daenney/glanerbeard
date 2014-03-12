@@ -54,3 +54,9 @@ docs/_build/
 
 # pyenv
 .python-version
+
+# settings
+settings.py
+
+# vim .swp
+*.swp
