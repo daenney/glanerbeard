@@ -1,0 +1,4 @@
+include README.rst
+include LICENSE
+recursive-include glanerbeard/static *.css *.js
+recursive-include glanerbeard/templates *.html
