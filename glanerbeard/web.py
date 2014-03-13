@@ -6,7 +6,7 @@ from flask import (
 	abort
 )
 
-from glanerbeard.server import Server
+from glanerbeard import server, show
 
 app = Flask(__name__)
 app.config.from_object('glanerbeard.default_settings')
@@ -18,9 +18,9 @@ if not isinstance(numeric_level, int):
 logging.basicConfig(level=numeric_level)
 log = logging.getLogger(__name__)
 
-servers = Server.createFromConfig(app.config['SERVERS'], app.config['API_KEYS'])
+servers = server.fromConfig(app.config['SERVERS'], app.config['API_KEYS'])
 
 @app.route('/')
 def index():
-	shows = [server.getShows() for server in servers]
-	return render_template('json.html', json=shows)
+	(queriedServers, shows) = show.collectFrom(servers)
+	return render_template('showstatus.html', shows=shows, servers=queriedServers)

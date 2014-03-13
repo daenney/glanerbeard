@@ -1,0 +1,29 @@
+{% extends '_layout.html' %}
+{% block content %}
+
+<table>
+  <thead>
+    <tr>
+      <th>Show</td>
+{% for server in servers %}
+      <th>{{server.name}}</th>
+{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+{% for show in shows | sort(attribute='name') %}
+    <tr>
+      <td>{{show.name}}</td>
+{% for server in servers %}
+{% if show.availableOn(server) %}
+      <td>YEP</td>
+{% else %}
+      <td>Nope</td>
+{% endif %}
+{% endfor %}
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
