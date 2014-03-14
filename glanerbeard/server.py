@@ -1,5 +1,4 @@
 import requests
-import json
 import logging
 from glanerbeard import show
 log = logging.getLogger(__name__)
@@ -12,10 +11,7 @@ class Server:
 
 	def requestJson(self, path):
 		url = '{url}/api/{apikey}{path}'.format(url=self.url,apikey=self.apikey,path=path)
-		response = requests.get(url)
-		response_str = response.content.decode('utf-8')
-		result = json.loads(response_str)
-		return result
+		return requests.get(url, verify=False).json()
 
 	def getShows(self):
 		shows = show.fromJson(self.requestJson('/?cmd=shows'))
