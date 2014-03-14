@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th>Show</td>
-{% for server in servers %}
+{% for server in servers | sort(attribute='name') %}
       <th>{{server.name}}</th>
 {% endfor %}
     </tr>
@@ -14,7 +14,7 @@
 {% for show in shows | sort(attribute='name') %}
     <tr>
       <td>{{show.name}}</td>
-{% for server in servers %}
+{% for server in servers | sort(attribute='name') %}
 {% if show.availableOn(server) %}
       <td class="positive"><i class="icon checkmark"></i></td>
 {% else %}
