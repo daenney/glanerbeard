@@ -1,3 +1,5 @@
+import logging
+
 class Show:
 	def __init__(self, sb_id, sickbeard_json):
 		self.name = sickbeard_json['show_name']
@@ -28,6 +30,5 @@ def collectFrom(servers):
 					showdict[s.sb_id] = s
 			successServers.append(server)
 		except Exception as e:
-			# TODO log error
-			pass
+			logging.warning(e)
 	return successServers, showdict.values()

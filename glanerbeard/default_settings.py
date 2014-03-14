@@ -4,3 +4,5 @@ DEV_LISTEN_PORT = 5000
 SERVERS = {}
 API_KEYS = {}
 LOGLEVEL = 'info'
+
+SSL_VERIFY=True

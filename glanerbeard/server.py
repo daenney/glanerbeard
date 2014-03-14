@@ -1,7 +1,6 @@
 import requests
 import logging
-from glanerbeard import show
-log = logging.getLogger(__name__)
+from glanerbeard import show, settings 
 
 class Server:
 	def __init__(self, name, url, apikey):
@@ -11,7 +10,7 @@ class Server:
 
 	def requestJson(self, path):
 		url = '{url}/api/{apikey}{path}'.format(url=self.url,apikey=self.apikey,path=path)
-		return requests.get(url, verify=False).json()
+		return requests.get(url,verify=settings['SSL_VERIFY']).json()
 
 	def getShows(self):
 		shows = show.fromJson(self.requestJson('/?cmd=shows'))
