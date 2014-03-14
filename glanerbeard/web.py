@@ -1,4 +1,5 @@
 import logging
+import json
 
 from flask import (
 	Flask,
@@ -8,9 +9,13 @@ from flask import (
 
 from glanerbeard import server, show
 
+def jsonprint(value):
+  return json.dumps(value, indent=2, separators=(',', ': ') )
+
 app = Flask(__name__)
 app.config.from_object('glanerbeard.default_settings')
 app.config.from_envvar('GLANERBEARD_SETTINGS')
+app.jinja_env.filters['jsonprint'] = jsonprint
 
 numeric_level = getattr(logging, app.config['LOGLEVEL'].upper(), None)
 if not isinstance(numeric_level, int):
