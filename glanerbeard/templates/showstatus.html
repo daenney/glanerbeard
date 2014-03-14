@@ -1,7 +1,7 @@
 {% extends '_layout.html' %}
 {% block content %}
 
-<table>
+<table class="ui table">
   <thead>
     <tr>
       <th>Show</td>
@@ -16,9 +16,9 @@
       <td>{{show.name}}</td>
 {% for server in servers %}
 {% if show.availableOn(server) %}
-      <td>YEP</td>
+      <td class="positive"><i class="icon checkmark"></i></td>
 {% else %}
-      <td>Nope</td>
+      <td class="negative"><i class="icon close"></i></td>
 {% endif %}
 {% endfor %}
     </tr>
