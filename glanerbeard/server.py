@@ -23,8 +23,10 @@ class Server:
         return 'Server {name} at {url}'.format(name=self.name, url=self.url)
 
 
-def fromConfig(serverdict, apikeydict):
+def from_config(config):
+    server_dict = config['SERVERS']
+    api_key_dict = config['API_KEYS']
     result = []
-    for name, url in serverdict.items():
-        result.append(Server(name, url, apikeydict[name]))
+    for name, url in server_dict.items():
+        result.append(Server(name, url, api_key_dict[name]))
     return result
