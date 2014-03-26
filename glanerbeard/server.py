@@ -1,28 +1,30 @@
 import requests
-import logging
-from glanerbeard import show, settings 
+
+from glanerbeard import show, settings
+
 
 class Server:
-	def __init__(self, name, url, apikey):
-		self.name = name
-		self.url = url
-		self.apikey = apikey
+    def __init__(self, name, url, apikey):
+        self.name = name
+        self.url = url
+        self.apikey = apikey
 
-	def requestJson(self, path):
-		url = '{url}/api/{apikey}{path}'.format(url=self.url,apikey=self.apikey,path=path)
-		return requests.get(url,verify=settings['SSL_VERIFY']).json()
+    def request_json(self, path):
+        url = '{url}/api/{apikey}{path}'.format(url=self.url, apikey=self.apikey, path=path)
+        return requests.get(url, verify=settings['SSL_VERIFY']).json()
 
-	def getShows(self):
-		shows = show.fromJson(self.requestJson('/?cmd=shows'))
-		for s in shows:
-			s.addServer(self)
-		return shows
+    def get_shows(self):
+        shows = show.from_json(self.request_json('/?cmd=shows'))
+        for s in shows:
+            s.add_server(self)
+        return shows
 
-	def __repr__(self):
-		return 'Server {name} at {url}'.format(name=self.name,url=self.url)
+    def __repr__(self):
+        return 'Server {name} at {url}'.format(name=self.name, url=self.url)
+
 
 def fromConfig(serverdict, apikeydict):
-	result = []
-	for name,url in serverdict.items():
-		result.append(Server(name, url, apikeydict[name]))
-	return result
+    result = []
+    for name, url in serverdict.items():
+        result.append(Server(name, url, apikeydict[name]))
+    return result

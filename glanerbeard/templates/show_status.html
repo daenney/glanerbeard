@@ -1,0 +1,29 @@
+{% extends '_layout.html' %}
+{% block content %}
+
+<table class="ui table">
+    <thead>
+    <tr>
+        <th>Show</td>
+            {% for server in servers | sort(attribute='name') %}
+        <th>{{server.name}}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for show in shows | sort(attribute='name') %}
+    <tr>
+        <td>{{show.name}}</td>
+        {% for server in servers | sort(attribute='name') %}
+        {% if show.available_on(server) %}
+        <td class="positive"><i class="icon checkmark"></i></td>
+        {% else %}
+        <td class="negative"><i class="icon close"></i></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

@@ -5,4 +5,4 @@ SERVERS = {}
 API_KEYS = {}
 LOGLEVEL = 'info'
 
-SSL_VERIFY=True
+SSL_VERIFY = True
